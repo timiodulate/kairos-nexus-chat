@@ -20,8 +20,10 @@
 		"socket.io": "^4.8.3"
 	},
 	"devDependencies": {
+		"@types/cors": "^2.8.19",
 		"@types/express": "^5.0.6",
 		"@types/node": "^25.5.0",
+		"@types/pg": "^8.20.0",
 		"ts-node": "^10.9.2",
 		"typescript": "^6.0.2"
 	}
