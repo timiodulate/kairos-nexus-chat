@@ -1,12 +1,12 @@
 {
-	"name": "server",
+	"name": "kairos-nexus-server",
 	"version": "1.0.0",
 	"description": "",
-	"main": "index.js",
+	"main": "index.ts",
 	"scripts": {
 		"dev": "ts-node-dev --respawn --transpile-only src/index.ts",
 		"build": "tsc",
-		"start": "node dist/app.js",
+		"start": "node dist/index.js",
 		"test": "echo \"Error: no test specified\" && exit 1"
 	},
 	"keywords": [],
@@ -24,6 +24,7 @@
 		"@types/express": "^5.0.6",
 		"@types/node": "^25.5.0",
 		"@types/pg": "^8.20.0",
+		"socket.io-client": "^4.8.3",
 		"ts-node": "^10.9.2",
 		"ts-node-dev": "^2.0.0",
 		"typescript": "^6.0.2"
