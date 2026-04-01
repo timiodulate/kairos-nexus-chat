@@ -1,0 +1,63 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    services:
+      postgres:
+        image: postgres:15
+        env:
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: postgres
+          POSTGRES_DB: kairos_chat_test
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+
+    env:
+      DATABASE_URL: postgresql://postgres:postgres@localhost:5432/kairos_chat_test
+      PORT: 3002
+      CLIENT_URL: http://localhost:3000
+      CI: true
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Install frontend dependencies
+        run: npm ci
+
+      - name: Install server dependencies
+        run: cd server && npm ci
+
+      - name: Run database migration
+        run: cd server && npm run db:migrate
+
+      - name: Lint
+        run: npm run lint
+
+      - name: Run frontend tests
+        run: npm run test:client
+
+      - name: Run server tests
+        run: npm run test:server
+
+      - name: Build frontend
+        run: npm run build
