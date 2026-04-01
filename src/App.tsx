@@ -1,26 +1,11 @@
-import logo from "./logo.svg";
 import "./App.css";
+import { UserProvider } from "./context/UserContext";
 
 function App() {
-	// console.log(process.env.REACT_APP_API_URL);
-
 	return (
-		<div className="App">
-			<header className="App-header !bg-red-700">
-				<img src={logo} className="App-logo" alt="logo" />
-				<p>
-					Edit <code>src/App.js</code> and save to reload.
-				</p>
-				<a
-					className="App-link"
-					href="https://reactjs.org"
-					target="_blank"
-					rel="noopener noreferrer"
-				>
-					Learn React
-				</a>
-			</header>
-		</div>
+		<UserProvider>
+			<div>App</div>
+		</UserProvider>
 	);
 }
 
