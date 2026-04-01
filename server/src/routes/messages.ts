@@ -7,11 +7,15 @@ const router = Router();
 router.get("/", async (_req: Request, res: Response) => {
 	try {
 		const result = await pool.query(
-			"SELECT id, sender, text, created_at FROM messages ORDER BY created_at ASC",
+			`SELECT id, sender, text, created_at 
+       FROM messages 
+       ORDER BY created_at ASC`,
 		);
+
 		res.json(result.rows);
 	} catch (err) {
 		console.error("Error fetching messages:", err);
+
 		res.status(500).json({ error: "Failed to fetch messages" });
 	}
 });
@@ -20,12 +24,14 @@ router.get("/", async (_req: Request, res: Response) => {
 router.post("/", async (req: Request, res: Response) => {
 	const { sender, text } = req.body;
 
-	// Validation
+	//! Validation
+	// This is the server side validation to ensure that the data is correct before inserting into the database.
 	if (!sender || typeof sender !== "string" || !sender.trim()) {
 		return res.status(400).json({
 			error: "sender is required and must be a non-empty string",
 		});
 	}
+
 	if (!text || typeof text !== "string" || !text.trim()) {
 		return res
 			.status(400)
@@ -39,12 +45,16 @@ router.post("/", async (req: Request, res: Response) => {
 
 	try {
 		const result = await pool.query(
-			"INSERT INTO messages (sender, text) VALUES ($1, $2) RETURNING id, sender, text, created_at",
+			`INSERT INTO messages (sender, text) 
+      VALUES ($1, $2) 
+      RETURNING id, sender, text, created_at"`,
 			[sender.trim(), text.trim()],
 		);
+
 		res.status(201).json(result.rows[0]);
 	} catch (err) {
 		console.error("Error creating message:", err);
+
 		res.status(500).json({ error: "Failed to create message" });
 	}
 });
