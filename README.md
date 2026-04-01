@@ -1,70 +1,123 @@
-# Getting Started with Create React App
+# Kairos Nexus Chat
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+A real-time 1-to-1 chat application built for the Kairos Nexus Challenge. Two users can send and receive messages instantly with full persistence.
 
-## Available Scripts
+## Prerequisites
 
-In the project directory, you can run:
+- **Node.js** 18+ (recommended 20 LTS)
+- **PostgreSQL** 14+
+- **npm** 9+
 
-### `npm start`
+## Tech Stack
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+### Frontend
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+- React 18+ with TypeScript
+- Tailwind CSS
+- shadcn/ui components (Button,
+  Card, Input, ScrollArea)
+- Socket.io client
 
-### `npm test`
+### Backend
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+- Node.js with Express
+- Socket.io
 
-### `npm run build`
+### Database
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+- PostgreSQL with raw SQL via
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+### Testing
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+- Jest
+- React Testing Library
 
-### `npm run eject`
+### CI/CD
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+- GitHub Actions
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## Quick Start
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+### 1. Clone & install
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+```bash
+git clone https://github.com/timiodulate/kairos-nexus-chat.git
+cd kairos-nexus-chat
 
-## Learn More
+# Install frontend dependencies
+npm install
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+# Install server dependencies
+cd server && npm install && cd ..
+```
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+### 2. Set up the database
 
-### Code Splitting
+```bash
+# Create the database
+psql -U postgres -c "CREATE DATABASE kairos_chat;"
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+### 3. Configure environment
 
-### Analyzing the Bundle Size
+```bash
+# Copy the example env file to project root
+cp .env.example .env
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+# Edit .env with your database credentials:
+# DATABASE_URL=postgresql://postgres:postgres@localhost:5432/kairos_chat
+# PORT=3001
+# REACT_APP_API_URL=http://localhost:3001
+# REACT_APP_SOCKET_URL=http://localhost:3001
+```
 
-### Making a Progressive Web App
+### 4. Run the migration
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+```bash
+cd server && npm run db:migrate && cd ..
+```
 
-### Advanced Configuration
+### 5. Start the application
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+```bash
+# Start both frontend and backend concurrently
+npm run dev
+```
 
-### Deployment
+This starts:
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+- **Frontend** on `http://localhost:3000`
+- **Backend** on `http://localhost:3001`
 
-### `npm run build` fails to minify
+### 6. Test it
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+1. Open `http://localhost:3000` in one browser tab
+2. Enter a username (e.g. "Alice") and click **Join Chat**
+3. Open `http://localhost:3000` in a second tab
+4. Enter a different username (e.g. "Bob") and click **Join Chat**
+5. Send messages — they appear in real-time in both tabs
+6. Refresh either tab — message history persists
+
+## Running Tests
+
+```bash
+# All tests (frontend + backend)
+npm test
+
+# Frontend tests only
+npm run test:client
+
+# Backend tests only
+npm run test:server
+
+# Lint check
+npm run lint
+```
+
+## Architecture
+
+See [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md) for the full system design, including data flow and component hierarchy.
+
+## API Reference
+
+See [docs/API.md](docs/API.md) for REST endpoints and Socket.io event contracts.
