@@ -1,4 +1,22 @@
+// Create mock BEFORE any imports
 const listeners: Record<string, ((...args: unknown[]) => void)[]> = {};
+
+const mockSocketInstance = {
+	on: jest.fn((event: string, cb: (...args: unknown[]) => void) => {
+		if (!listeners[event]) listeners[event] = [];
+		listeners[event].push(cb);
+	}),
+	off: jest.fn(),
+	emit: jest.fn(),
+	disconnect: jest.fn(),
+	connected: true,
+	__simulateEvent: (event: string, ...args: unknown[]) => {
+		listeners[event]?.forEach((cb) => cb(...args));
+	},
+	__resetListeners: () => {
+		Object.keys(listeners).forEach((key) => delete listeners[key]);
+	},
+};
 
 const mockSocket = {
 	on: jest.fn((event: string, callback: (...args: unknown[]) => void) => {
@@ -23,6 +41,6 @@ const mockSocket = {
 	},
 };
 
-export const io = jest.fn(() => mockSocket);
-export default { io };
-export { mockSocket };
+const io = jest.fn(() => mockSocket);
+
+export { io, mockSocket, mockSocketInstance };
