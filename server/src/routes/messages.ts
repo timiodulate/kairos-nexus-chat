@@ -31,7 +31,6 @@ router.post("/", async (req: Request, res: Response) => {
 			error: "sender is required and must be a non-empty string",
 		});
 	}
-
 	if (!text || typeof text !== "string" || !text.trim()) {
 		return res
 			.status(400)
@@ -47,7 +46,7 @@ router.post("/", async (req: Request, res: Response) => {
 		const result = await pool.query(
 			`INSERT INTO messages (sender, text) 
       VALUES ($1, $2) 
-      RETURNING id, sender, text, created_at"`,
+      RETURNING id, sender, text, created_at`,
 			[sender.trim(), text.trim()],
 		);
 
