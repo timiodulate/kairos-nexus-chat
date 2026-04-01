@@ -133,6 +133,7 @@ function HomePage() {
 								disabled={!isConnected}
 								autoFocus
 							/>
+
 							<Button
 								type="submit"
 								disabled={!inputText.trim() || !isConnected}
