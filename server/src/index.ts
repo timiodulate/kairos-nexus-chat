@@ -4,6 +4,7 @@ import app from "./app";
 import path from "path";
 
 import dotenv from "dotenv";
+import { registerSocketHandlers } from "./socket";
 
 dotenv.config({ path: path.resolve(__dirname, "../../.env") });
 
@@ -20,13 +21,12 @@ const io = new Server(server, {
 		methods: ["GET", "POST"],
 	},
 });
-
-io.on("connection", (socket) => {
-	// ...
-});
+registerSocketHandlers(io);
 
 // app.use(express.json());
 
 server.listen(PORT, () => {
 	console.log(`Server running on port ${PORT}`);
 });
+
+export { server, io };
