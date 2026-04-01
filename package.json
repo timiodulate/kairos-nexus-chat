@@ -21,12 +21,16 @@
 		"web-vitals": "^2.1.4"
 	},
 	"scripts": {
-		"start": "react-scripts start",
+		"install:all": "npm install && cd server && npm install",
+		"dev": "concurrently \"npm run dev:server\" \"npm run dev:client\"",
+		"dev:client": "react-scripts start",
+		"dev:server": "cd server && npm run dev",
 		"build": "react-scripts build",
 		"test": "react-scripts test",
 		"lint": "eslint src/ server/src/ --ext .ts,.tsx --max-warnings 0",
-		"eject": "react-scripts eject",
-		"db:migrate": "cd server && npm run db:migrate"
+		"start": "react-scripts start",
+		"db:migrate": "cd server && npm run db:migrate",
+		"eject": "react-scripts eject"
 	},
 	"eslintConfig": {
 		"extends": [
