@@ -86,14 +86,14 @@ npm run dev
 
 This starts:
 
-- **Frontend** on `http://localhost:3000`
-- **Backend** on `http://localhost:3001`
+- **Frontend** on `http://localhost:3003`
+- **Backend** on `http://localhost:3002`
 
 ### 6. Test it
 
-1. Open `http://localhost:3000` in one browser tab
+1. Open `http://localhost:3003` in one browser tab
 2. Enter a username (e.g. "Alice") and click **Join Chat**
-3. Open `http://localhost:3000` in a second tab
+3. Open `http://localhost:3003` in a second tab
 4. Enter a different username (e.g. "Bob") and click **Join Chat**
 5. Send messages — they appear in real-time in both tabs
 6. Refresh either tab — message history persists

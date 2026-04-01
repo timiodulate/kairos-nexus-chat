@@ -28,7 +28,7 @@ jobs:
     env:
       DATABASE_URL: postgresql://postgres:postgres@localhost:5432/kairos_chat_test
       PORT: 3002
-      CLIENT_URL: http://localhost:3000
+      CLIENT_URL: http://localhost:3003
       CI: true
 
     steps:
