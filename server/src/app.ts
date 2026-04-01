@@ -1,5 +1,6 @@
 import express, { Request, Response } from "express";
 import cors from "cors";
+import messageRoutes from "./routes/messages";
 
 const app = express();
 
@@ -13,8 +14,6 @@ app.use(
 app.use(express.json());
 
 // Routes
-app.get("/", (req: Request, res: Response) => {
-	res.send("Hello, TypeScript + Express!");
-});
+app.use("/api/messages", messageRoutes);
 
 export default app;
