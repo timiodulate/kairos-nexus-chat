@@ -1,12 +1,29 @@
 {
+	"env": {
+		"browser": true,
+		"es2021": true,
+		"node": true,
+		"jest": true
+	},
+	"extends": [
+		"eslint:recommended",
+		"plugin:react/recommended",
+		"plugin:react-hooks/recommended",
+		"plugin:@typescript-eslint/recommended"
+	],
+	"parser": "@typescript-eslint/parser",
+	"parserOptions": {
+		"ecmaFeatures": { "jsx": true },
+		"ecmaVersion": "latest",
+		"sourceType": "module"
+	},
+	"plugins": ["react", "@typescript-eslint", "react-hooks"],
 	"rules": {
-		"prefer-const": "off",
-		"@typescript-eslint/no-unused-vars": "off",
-		"react/no-unescaped-entities": "off",
-		"@typescript-eslint/no-explicit-any": "off",
-		"@typescript-eslint/no-empty-object-type": "off",
-		"semi": "off",
-		"react-hooks/rules-of-hooks": "warn",
-		"react/jsx-key": "warn"
+		"react/react-in-jsx-scope": "off",
+		"@typescript-eslint/no-explicit-any": "warn",
+		"react/prop-types": "off"
+	},
+	"settings": {
+		"react": { "version": "detect" }
 	}
 }
