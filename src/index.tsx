@@ -5,6 +5,7 @@ import reportWebVitals from "./reportWebVitals";
 import { BrowserRouter, Route, Routes } from "react-router";
 import { UserProvider } from "./context/UserContext";
 import HomePage from "./pages/home";
+import LoginPage from "./pages/login";
 
 const rootElement = document.getElementById("root");
 if (!rootElement) throw new Error("Root element not found");
@@ -16,6 +17,7 @@ root.render(
 			<UserProvider>
 				<Routes>
 					<Route path="/" element={<HomePage />} />
+					<Route path="/login" element={<LoginPage />} />
 				</Routes>
 			</UserProvider>
 		</React.StrictMode>

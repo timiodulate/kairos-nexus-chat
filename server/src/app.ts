@@ -7,7 +7,7 @@ const app = express();
 // midd
 app.use(
 	cors({
-		origin: process.env.CLIENT_URL || "http://localhost:3000",
+		origin: process.env.CLIENT_URL || "http://localhost:3003",
 		methods: ["GET", "POST"],
 	}),
 );
