@@ -66,9 +66,9 @@ cp .env.example .env
 
 # Edit .env with your database credentials:
 # DATABASE_URL=postgresql://postgres:postgres@localhost:5432/kairos_chat
-# PORT=3001
-# REACT_APP_API_URL=http://localhost:3001
-# REACT_APP_SOCKET_URL=http://localhost:3001
+# PORT=3002
+# REACT_APP_API_URL=http://localhost:3002
+# REACT_APP_SOCKET_URL=http://localhost:3002
 ```
 
 ### 4. Run the migration
