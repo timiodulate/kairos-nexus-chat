@@ -32,4 +32,4 @@ b8b8d2a chores: setup frontend scafold
 79ada62 chore: adds tailwind manually
 1aeffc5 chore: adds typescript manually
 c408030 chore: adds nvmrc
-0624419 initial commit
+0624419 initial
