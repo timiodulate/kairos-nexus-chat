@@ -8,7 +8,7 @@ interface SendMessagePayload {
 
 export function registerSocketHandlers(io: Server) {
 	io.on("connection", (socket: Socket) => {
-		console.log(`Client connected: ${socket.id}`);
+		// console.log(`Client connected: ${socket.id}`);
 
 		socket.on("sendMessage", async (payload: SendMessagePayload) => {
 			const { sender, text } = payload;

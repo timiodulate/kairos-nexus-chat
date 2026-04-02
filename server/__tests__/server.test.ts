@@ -116,7 +116,7 @@ describe("POST /api/messages", () => {
 			body: JSON.stringify({ sender: "Alice", text: "Hello!" }),
 		});
 		const body: any = await res.json();
-		console.log(body);
+		// console.log(body);
 
 		expect(res.status).toBe(201);
 		expect(body).toHaveProperty("id");

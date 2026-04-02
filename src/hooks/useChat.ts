@@ -50,41 +50,41 @@ export function useChat(username: string): UseChatReturn {
 
 	// Socket.io connection
 	useEffect(() => {
-		console.log("useChat: Socket.io effect running");
+		// console.log("useChat: Socket.io effect running");
 		const socket = io(SOCKET_URL, {
 			transports: ["websocket", "polling"],
 		});
-		console.log("useChat: socket created:", socket);
-		console.log("useChat: socket.on type:", typeof socket?.on);
-		console.log(
-			"useChat: socket has __simulateEvent?",
-			"__simulateEvent" in (socket || {}),
-		);
+		// console.log("useChat: socket created:", socket);
+		// console.log("useChat: socket.on type:", typeof socket?.on);
+		// console.log(
+		// 	"useChat: socket has __simulateEvent?",
+		// 	"__simulateEvent" in (socket || {}),
+		// );
 		socketRef.current = socket;
 
-		console.log("useChat: About to call socket.on(connect)");
+		// console.log("useChat: About to call socket.on(connect)");
 		socket.on("connect", () => {
-			console.log("useChat: connect callback fired");
+			// console.log("useChat: connect callback fired");
 			setIsConnected(true);
 			setError(null);
 		});
 
-		console.log("useChat: About to call socket.on(disconnect)");
+		// console.log("useChat: About to call socket.on(disconnect)");
 		socket.on("disconnect", () => {
-			console.log("useChat: disconnect callback fired");
+			// console.log("useChat: disconnect callback fired");
 			setIsConnected(false);
 		});
 
-		console.log("useChat: About to call socket.on(connect_error)");
+		// console.log("useChat: About to call socket.on(connect_error)");
 		socket.on("connect_error", () => {
-			console.log("useChat: connect_error callback fired");
+			// console.log("useChat: connect_error callback fired");
 			setIsConnected(false);
 			setError("Connection lost. Retrying...");
 		});
 
-		console.log("useChat: About to call socket.on(message)");
+		// console.log("useChat: About to call socket.on(message)");
 		socket.on("message", (message: Message) => {
-			console.log("useChat: message callback fired");
+			// console.log("useChat: message callback fired");
 			setMessages((prev) => [...prev, message]);
 		});
 

@@ -9,36 +9,36 @@ const listeners: Record<string, ((...args: unknown[]) => void)[]> = {};
 
 const mockSocketInstance = {
 	on: jest.fn((event: string, cb: (...args: unknown[]) => void) => {
-		console.log("mockSocket.on called with event:", event);
+		// console.log("mockSocket.on called with event:", event);
 		if (!listeners[event]) listeners[event] = [];
 		listeners[event].push(cb);
-		console.log(
-			"After adding listener, listeners keys:",
-			Object.keys(listeners),
-		);
+		// console.log(
+		// 	"After adding listener, listeners keys:",
+		// 	Object.keys(listeners),
+		// );
 	}),
 	off: jest.fn(),
 	emit: jest.fn(),
 	disconnect: jest.fn(),
 	connected: true,
 	__simulateEvent: (event: string, ...args: unknown[]) => {
-		console.log(
-			"__simulateEvent called with:",
-			event,
-			"listeners[event] exists?",
-			!!listeners[event],
-		);
+		// console.log(
+		// 	"__simulateEvent called with:",
+		// 	event,
+		// 	"listeners[event] exists?",
+		// 	!!listeners[event],
+		// );
 		listeners[event]?.forEach((cb) => cb(...args));
 	},
 	__resetListeners: () => {
-		console.log("__resetListeners called");
+		// console.log("__resetListeners called");
 		Object.keys(listeners).forEach((key) => delete listeners[key]);
 	},
 };
 
 jest.mock("socket.io-client", () => {
 	const ioFn = jest.fn(() => {
-		console.log("io() called, returning mockSocketInstance");
+		// console.log("io() called, returning mockSocketInstance");
 		return mockSocketInstance;
 	});
 	return {
@@ -133,10 +133,10 @@ function renderChat(username = "Alice") {
 describe("HomePage", () => {
 	it("debug: check mock", () => {
 		// const { io } = require("socket.io-client");
-		const socket = io();
-		console.log("io:", typeof io);
-		console.log("socket:", socket);
-		console.log("socket.on:", typeof socket?.on);
+		// const socket = io();
+		// console.log("io:", typeof io);
+		// console.log("socket:", socket);
+		// console.log("socket.on:", typeof socket?.on);
 	});
 
 	it("shows loading state then renders messages from history", async () => {
@@ -209,7 +209,7 @@ describe("HomePage", () => {
 		});
 
 		// Debug: check listeners
-		console.log("Listeners after wait:", Object.keys(listeners));
+		// console.log("Listeners after wait:", Object.keys(listeners));
 
 		// Simulate receiving a new message via socket
 		await act(async () => {
@@ -222,13 +222,13 @@ describe("HomePage", () => {
 		});
 
 		// Debug: check if listener was called
-		console.log("After simulateEvent, listeners:", Object.keys(listeners));
+		// console.log("After simulateEvent, listeners:", Object.keys(listeners));
 
 		// Try to find the message with a more flexible search
 		await waitFor(
 			() => {
 				const text = screen.queryByText("New socket message!");
-				console.log("Message found?", !!text);
+				// console.log("Message found?", !!text);
 				expect(text).toBeInTheDocument();
 			},
 			{ timeout: 2000 },

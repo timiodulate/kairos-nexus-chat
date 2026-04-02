@@ -59,15 +59,15 @@ Kairos Nexus Chat is a real-time 1-to-1 messaging application with three layers:
 ```
 App
 └── UserProvider (context)
-    └── AppContent
-        ├── LoginScreen          (when username is empty)
+    └── AppContent (pages)
+        ├── LoginPage          (when username is empty)
         │   ├── Card
         │   ├── Input
         │   └── Button
         │
-        └── ChatPage             (when username is set)
-            ├── Header (username, connection status, logout)
-            ├── Error Banner (conditional)
+        └── HomePage             (when username is set)
+            ├── MessagesHeader (username, connection status, logout)
+            ├── ErrorBanner (conditional)
             ├── ScrollArea
             │   ├── Loading Spinner (conditional)
             │   ├── Empty State (conditional)
