@@ -37,7 +37,7 @@ const mockSocketInstance = {
 };
 
 jest.mock("socket.io-client", () => {
-	const ioFn = jest.fn((...args: any[]) => {
+	const ioFn = jest.fn(() => {
 		console.log("io() called, returning mockSocketInstance");
 		return mockSocketInstance;
 	});
@@ -176,7 +176,7 @@ describe("HomePage", () => {
 		await user.type(input, "New message");
 
 		// Try to click send button
-		const button: any = screen.getByTestId("send-button");
+		const button = screen.getByTestId("send-button") as HTMLButtonElement;
 		if (!button?.disabled) {
 			await user.click(button);
 			expect(mockSocket.emit).toHaveBeenCalledWith("sendMessage", {

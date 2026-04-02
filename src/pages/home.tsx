@@ -25,7 +25,7 @@ function HomePage() {
 		if (!username) {
 			navigate("/login");
 		}
-	}, []);
+	}, [navigate, username]);
 
 	// Auto-scroll to bottom when new messages arrive
 	useEffect(() => {
@@ -108,7 +108,7 @@ function HomePage() {
 							</div>
 						) : (
 							<div data-testid="message-list">
-								{messages.map((msg: any) => (
+								{messages.map((msg) => (
 									<MessageBubble
 										key={msg.id}
 										message={msg}
